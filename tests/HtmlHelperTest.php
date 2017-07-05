@@ -9,7 +9,7 @@ class HtmlHelperTest extends TestCase
 
     public static function setUpBeforeClass()
     {
-        HtmlHelperTest::$html = HtmlHelper::getHtmlFrom("samples/test.html");
+        HtmlHelperTest::$html = HtmlHelper::getHtmlFrom("fixtures/test.html");
     }
 
     public function testFindTitle()
@@ -31,7 +31,7 @@ class HtmlHelperTest extends TestCase
     public function testFindMainContent()
     {
         $result = HtmlHelper::findMainContent(HtmlHelperTest::$html);
-        $expected_result = HtmlHelper::getHtmlFrom("samples/main_content.html");
+        $expected_result = HtmlHelper::getHtmlFrom("fixtures/main_content.html");
 
         $this->assertEquals($result, $expected_result);
 
@@ -40,7 +40,7 @@ class HtmlHelperTest extends TestCase
     public function testFixHtml()
     {
         $result = HtmlHelper::fixHtml(HtmlHelperTest::$html);
-        $expected_result = HtmlHelper::getHtmlFrom("samples/fixed_html.html");
+        $expected_result = HtmlHelper::getHtmlFrom("fixtures/fixed_html.html");
 
         $this->assertEquals($result, $expected_result);
     }
