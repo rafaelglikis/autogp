@@ -1,4 +1,7 @@
+# UNDER CONSTRUCTION
 # autogp
 Scraping micro-framework (php)
 
-UNDER CONSTRUCTION
+## Instalation
+apt install php-curl
+apt-get install php7.0-mbstring

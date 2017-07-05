@@ -1,5 +1,7 @@
 <?php
+require_once("vendor/autoload.php");
+use rafaelglikis\autogp\Helpers\HtmlHelper;
 
-use rafaelglikis\autogp\Helpers;
+$html = HtmlHelper::getHtmlFrom("tests/test.html");
 
-print Helpers\HtmlHelper::getHtmlFrom("http://www.otherside.gr/2017/07/superyacht-aksias-160-ekatommyriwn-eurw/");
+print HtmlHelper::findMainContent($html);

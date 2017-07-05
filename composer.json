@@ -1,10 +1,11 @@
 {
-  "name": "rafaelglikis/wp_copier",
+  "name": "rafaelglikis/autogp",
   "autoload":
   {
     "psr-0" :
     {
-      "rafaelglikis\\wp_copier" : "src"
+      "rafaelglikis\\autogp" : "src"
     }
   }
 }
+
