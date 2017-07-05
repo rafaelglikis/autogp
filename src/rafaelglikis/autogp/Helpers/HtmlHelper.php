@@ -118,13 +118,11 @@ class HtmlHelper
         $html = strip_tags($html, '<a>');
         $url = null;
 
-        if (strpos($html, "href='") !== false)
-        {
+        if (strpos($html, "href='") !== false) {
             $url = TextHelper::strCut($html, "href='", "'");
         }
 
-        if (strpos($html, 'href="') !== false)
-        {
+        if (strpos($html, 'href="') !== false) {
             $url = TextHelper::strCut($html, 'href="', '"');
         }
 

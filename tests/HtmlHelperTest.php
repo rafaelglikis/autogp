@@ -43,7 +43,6 @@ class HtmlHelperTest extends TestCase
         $expected_result = HtmlHelper::getHtmlFrom("samples/fixed_html.html");
 
         $this->assertEquals($result, $expected_result);
-
     }
 
     public function testClearLink()
