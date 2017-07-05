@@ -12,6 +12,7 @@ class HtmlHelper
     const IRRELEVANT_ID_NAME_SCORE = -50;
 
 
+
     // Regular Expressions
     const IRRELEVANT_ID_REGEX = "/(comment|meta|footer|footnote)/i";
     const SPECIAL_ID_REGEX = "/((^|\\s)(post|hentry|entry[-]?(content|text|body)?|article[-]?(content|text|body)?)(\\s|$))/i";
