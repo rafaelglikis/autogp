@@ -6,6 +6,8 @@
     {
       "rafaelglikis\\autogp" : "src"
     }
+  },
+  "require": {
+    "phpunit/phpunit": "^6.2"
   }
 }
-

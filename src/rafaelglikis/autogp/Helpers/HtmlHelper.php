@@ -11,8 +11,6 @@ class HtmlHelper
     const SPECIAL_ID_NAME_SCORE = 25;
     const IRRELEVANT_ID_NAME_SCORE = -50;
 
-
-
     // Regular Expressions
     const IRRELEVANT_ID_REGEX = "/(comment|meta|footer|footnote)/i";
     const SPECIAL_ID_REGEX = "/((^|\\s)(post|hentry|entry[-]?(content|text|body)?|article[-]?(content|text|body)?)(\\s|$))/i";
@@ -47,7 +45,7 @@ class HtmlHelper
      * @param $html
      * @return string
      */
-    private static function fixHtml($html)
+    public static function fixHtml($html)
     {
         $html = preg_replace('#<script(.*?)>(.*?)</script>#is', '', $html);
         $html = preg_replace('#<style(.*?)>(.*?)</style>#is', '', $html);
@@ -69,7 +67,7 @@ class HtmlHelper
 
         $title = $nodes->item(0)->nodeValue;
 
-        return TextHelper::strCut($title, '', '|');
+        return $title;
     }
 
     /**
@@ -97,7 +95,7 @@ class HtmlHelper
 
     /**
      * Extracts image from given html
-     * TODO use regex to do that
+     * TODO use regex to do that and extract multible
      * @param $html
      * @return null|string
      */
@@ -111,7 +109,7 @@ class HtmlHelper
 
     /**
      * Extracts link from given html
-     * TODO use regex to do that
+     * TODO use regex to do that and extract multible
      * @param $html
      * @return null|string
      */
@@ -138,10 +136,10 @@ class HtmlHelper
      * @param $url
      * @return mixed
      */
-    private static function clearLink($url)
+    public static function clearLink($url)
     {
-        $url = str_replace('https://www', '', $url);
-        $url = str_replace('http://www', '', $url);
+        $url = str_replace('https://www.', '', $url);
+        $url = str_replace('http://www.', '', $url);
         $url = str_replace('https://', '', $url);
         $url = str_replace('http://', '', $url);
 
