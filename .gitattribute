@@ -1,2 +1,2 @@
-tests/samples/* linguist-vendored
-
+tests/samples/* linguist-vendored=false
+*.html linguist-language=PHP
