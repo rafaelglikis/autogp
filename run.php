@@ -5,3 +5,4 @@ use rafaelglikis\autogp\Helpers\HtmlHelper;
 $html = HtmlHelper::getHtmlFrom("tests/test.html");
 
 print HtmlHelper::findMainContent($html);
+
