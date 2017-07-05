@@ -1,0 +1,10 @@
+{
+  "name": "rafaelglikis/wp_copier",
+  "autoload":
+  {
+    "psr-0" :
+    {
+      "rafaelglikis\\wp_copier" : "src"
+    }
+  }
+}
