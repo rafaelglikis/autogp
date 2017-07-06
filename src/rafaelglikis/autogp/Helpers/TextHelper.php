@@ -2,13 +2,15 @@
 namespace rafaelglikis\autogp\Helpers;
 class TextHelper
 {
-    # Returns the string value from data between start - end
+    /**
+     * Returns the string value from data between start - end
+     * @param string $str
+     * @param string|null $start
+     * @param string|null $end
+     * @return string
+     */
     static function strCut(string $str,string $start=null, string $end=null): string
     {
-        if ($start == null)
-        {
-            $intStart = 0;
-        }
         if ($end == null)
         {
             $intStart = @strpos($str,$start) + strlen($start);

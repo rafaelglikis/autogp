@@ -2,11 +2,13 @@
 require_once("vendor/autoload.php");
 
 use rafaelglikis\autogp\Helpers\HtmlHelper;
+use rafaelglikis\autogp\Helpers\TextHelper;
 
 $html = HtmlHelper::getHtmlFrom("tests/fixtures/test.html");
 
-//print HtmlHelper::fixHtml($html);
 
+//print HtmlHelper::fixHtml($html);
+/*
 $URL_REGEX = "|<a.*(?=href=\"([^\"]*)\")[^>]*>([^<]*)</a>|i";
 
 if(preg_match_all($URL_REGEX, $html, $matches))
@@ -25,6 +27,6 @@ else
 {
     echo 'No match found';
 }
-
+*/
 
 
