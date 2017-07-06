@@ -55,7 +55,6 @@ class HtmlHelperTest extends TestCase
         ];
 
         foreach ($links as $link) {
-            echo $link;
             $this->assertEquals("google.com", HtmlHelper::clearLink($link));
         }
     }

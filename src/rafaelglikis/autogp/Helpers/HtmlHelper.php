@@ -2,6 +2,7 @@
 namespace rafaelglikis\autogp\Helpers;
 
 use DOMDocument;
+use DOMElement;
 
 class HtmlHelper
 {
@@ -23,12 +24,12 @@ class HtmlHelper
      * @param $source
      * @return string
      */
-    public static function getHtmlFrom($source)
+    public static function getHtmlFrom(string $source): string
     {
         return file_get_contents($source);
     }
 
-    public static function curl($url)
+    public static function curl(string $url): string
     {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -45,7 +46,7 @@ class HtmlHelper
      * @param $html
      * @return string
      */
-    public static function fixHtml($html)
+    public static function fixHtml(string $html): string
     {
         $html = preg_replace('#<script(.*?)>(.*?)</script>#is', '', $html);
         $html = preg_replace('#<style(.*?)>(.*?)</style>#is', '', $html);
@@ -59,7 +60,7 @@ class HtmlHelper
      * @param $html
      * @return string
      */
-    public static function findTitle($html)
+    public static function findTitle(string $html):string
     {
         $doc = new DOMDocument();
         @$doc->loadHTML($html);
@@ -75,7 +76,7 @@ class HtmlHelper
      * @param $html
      * @return string
      */
-    public static function findMainImage($html)
+    public static function findMainImage(string $html): string
     {
         $doc = new DOMDocument();
         @$doc->loadHTML($html);
@@ -99,7 +100,7 @@ class HtmlHelper
      * @param $html
      * @return null|string
      */
-    private static function extractImage($html)
+    private static function extractImage(string $html):string
     {
         $html = strip_tags($html, '<a><img>');
         $url = TextHelper::strCut($html, 'href="', '"');
@@ -113,7 +114,7 @@ class HtmlHelper
      * @param $html
      * @return null|string
      */
-    private static function extractLink($html)
+    private static function extractLink(string $html): string
     {
         $html = strip_tags($html, '<a>');
         $url = null;
@@ -134,7 +135,7 @@ class HtmlHelper
      * @param $url
      * @return mixed
      */
-    public static function clearLink($url)
+    public static function clearLink(string $url): string
     {
         $url = str_replace('https://www.', '', $url);
         $url = str_replace('http://www.', '', $url);
@@ -150,7 +151,7 @@ class HtmlHelper
      * @param $html
      * @return string
      */
-    public static function findMainContent($html)
+    public static function findMainContent(string $html): string
     {
         $mainContentNode = HtmlHelper::findTopNode($html);
 
@@ -170,7 +171,7 @@ class HtmlHelper
      * @param $html
      * @return mixed|null
      */
-    private static function findTopNode($html)
+    private static function findTopNode(string $html) : DOMElement
     {
         $dom = new DOMDocument();
         @$dom->loadHTML($html);
@@ -207,7 +208,7 @@ class HtmlHelper
      * @param $paragraph
      * @return int
      */
-    private static function calculateParagraphScore($paragraph)
+    private static function calculateParagraphScore(DOMElement $paragraph): int
     {
         $parentNode = $paragraph->parentNode;
 
