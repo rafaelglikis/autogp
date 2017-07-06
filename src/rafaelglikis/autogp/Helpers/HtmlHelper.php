@@ -142,6 +142,8 @@ class HtmlHelper
         $url = str_replace('https://', '', $url);
         $url = str_replace('http://', '', $url);
 
+        if (strpos($url, '/') !== false) return TextHelper::strCut($url, null, "/");
+
         return $url;
     }
 

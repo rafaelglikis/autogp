@@ -1,5 +1,4 @@
 <?php
-
 use PHPUnit\Framework\TestCase;
 use rafaelglikis\autogp\Helpers\HtmlHelper;
 
@@ -51,7 +50,8 @@ class HtmlHelperTest extends TestCase
             "http://www.google.com",
             "https://www.google.com",
             "http://google.com",
-            "https://google.com"
+            "https://google.com",
+            "https://google.com/savarakatranemia"
         ];
 
         foreach ($links as $link) {

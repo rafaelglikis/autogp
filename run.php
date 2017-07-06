@@ -1,13 +1,16 @@
 <?php
+namespace examples;
 require_once("vendor/autoload.php");
 
 use rafaelglikis\autogp\Helpers\HtmlHelper;
 use rafaelglikis\autogp\Helpers\TextHelper;
+use rafaelglikis\autogp\Scrapers\ArticleScraper;
 
-$html = HtmlHelper::getHtmlFrom("tests/fixtures/test.html");
+
 
 
 //print HtmlHelper::fixHtml($html);
+
 /*
 $URL_REGEX = "|<a.*(?=href=\"([^\"]*)\")[^>]*>([^<]*)</a>|i";
 

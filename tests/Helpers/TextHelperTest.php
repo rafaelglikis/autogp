@@ -1,5 +1,4 @@
 <?php
-
 use PHPUnit\Framework\TestCase;
 use rafaelglikis\autogp\Helpers\TextHelper;
 

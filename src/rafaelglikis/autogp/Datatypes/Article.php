@@ -1,9 +1,11 @@
 <?php
+namespace rafaelglikis\autogp\Datatypes;
 
 class Article
 {
-    private $source_url;
-    private $source_site;
+    private $sourceUrl;
+    private $sourceSite;
+    private $html;
 
     private $title;
     private $content;
@@ -11,22 +13,22 @@ class Article
 
     public function getSourceUrl(): string
     {
-        return $this->source_url;
+        return $this->sourceUrl;
     }
 
-    public function setSourceUrl(string $source_url)
+    public function setSourceUrl(string $sourceUrl)
     {
-        $this->source_url = $source_url;
+        $this->sourceUrl = $sourceUrl;
     }
 
     public function getSourceSite(): string
     {
-        return $this->source_site;
+        return $this->sourceSite;
     }
 
-    public function setSourceSite(string $source_site)
+    public function setSourceSite(string $sourceSite)
     {
-        $this->source_site = $source_site;
+        $this->sourceSite = $sourceSite;
     }
 
     public function getTitle() : string
@@ -57,5 +59,21 @@ class Article
     public function setImgUrl(string $imgUrl)
     {
         $this->imgUrl = $imgUrl;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getHtml()
+    {
+        return $this->html;
+    }
+
+    /**
+     * @param mixed $html
+     */
+    public function setHtml($html)
+    {
+        $this->html = $html;
     }
 }

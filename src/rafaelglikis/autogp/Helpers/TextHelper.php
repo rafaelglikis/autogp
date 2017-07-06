@@ -9,7 +9,7 @@ class TextHelper
      * @param string|null $end
      * @return string
      */
-    static function strCut(string $str,string $start=null, string $end=null): string
+    public static function strCut(string $str,string $start=null, string $end=null): string
     {
         if ($end == null)
         {
