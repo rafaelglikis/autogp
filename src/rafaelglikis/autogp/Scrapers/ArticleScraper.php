@@ -2,8 +2,10 @@
 namespace rafaelglikis\autogp\Scrapers;
 use rafaelglikis\autogp\Datatypes\Article;
 use rafaelglikis\autogp\Helpers\HtmlHelper;
+use rafaelglikis\autogp\Scrapers\Interfaces\LastArticle;
+use rafaelglikis\autogp\Scrapers\Interfaces\SingleArticleScraper;
 
-abstract class ArticleScraper
+abstract class ArticleScraper implements SingleArticleScraper, LastArticleScraper
 {
     private $articleUrls = array();
     private $articles = array();
