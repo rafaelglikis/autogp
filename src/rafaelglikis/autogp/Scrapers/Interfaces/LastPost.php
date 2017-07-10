@@ -1,7 +1,9 @@
 <?php
+
 namespace rafaelglikis\autogp\Scrapers\Interfaces;
 
-interface LastArticleScraper
+
+interface LastPost
 {
     public static function extractLastArticleFromCategory($categoryUrl): string;
 }

@@ -1,11 +1,12 @@
 <?php
 namespace rafaelglikis\autogp\Scrapers;
+
 use rafaelglikis\autogp\Datatypes\Article;
 use rafaelglikis\autogp\Helpers\HtmlHelper;
-use rafaelglikis\autogp\Scrapers\Interfaces\LastArticle;
+use rafaelglikis\autogp\Scrapers\Interfaces\LastPost;
 use rafaelglikis\autogp\Scrapers\Interfaces\SingleArticleScraper;
 
-abstract class ArticleScraper implements SingleArticleScraper, LastArticleScraper
+abstract class ArticleScraper implements SingleArticleScraper, LastPost//, LastArticleScraper
 {
     private $articleUrls = array();
     private $articles = array();
