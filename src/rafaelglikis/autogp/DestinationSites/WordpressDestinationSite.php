@@ -1,14 +1,12 @@
 <?php
 namespace rafaelglikis\autogp\DestinationSites;
 use PHPUnit\Framework\Exception;
-use rafaelglikis\autogp\DestinationSites\Interfaces\DestinationSite;
 
 /** @noinspection PhpUndefinedFunctionInspection */
-class WordpressDestinationSite implements DestinationSite
+class WordpressDestinationSite extends DestinationSite
 {
     const UNCATEGORIZED = 1;
     private $wpPath;
-
     public function __construct($wpPath)
     {
         $this->wpPath = $wpPath;
@@ -23,6 +21,7 @@ class WordpressDestinationSite implements DestinationSite
         // Make $category_ids array
         if (!is_array($categoryIds)) $categoryIds = array($categoryIds);
 
+
         // Create post object
         $myPost = array();
         $myPost['post_title'] = $title;
@@ -33,10 +32,10 @@ class WordpressDestinationSite implements DestinationSite
         try {
             $postId = wp_insert_post($myPost); // Insert post (wordpress way)
             $this->setPostImage($postId, $imageUrl); // Set Image (wordpress way)
-            print "[+] Article: " . $title . " added as " . $status . "\n";
+            print "[+] Article: " . $title . " added as " . $status . " [ categories: ". implode(",", $categoryIds) . " ]\n";
         }
         catch (Exception $exception) {
-            print "[-] Problem adding article: " . $title . " - skipped";
+            print "[-] Problem adding article: " . $title . " - skipped\n";
             print $exception;
         }
     }
@@ -46,30 +45,30 @@ class WordpressDestinationSite implements DestinationSite
      */
     protected function setPostImage(int $postId, string $imageUrl)
     {
-        $upload_dir = wp_upload_dir();
-        $image_data = file_get_contents($imageUrl);
+        $uploadDirectory = wp_upload_dir();
+        $imageData = file_get_contents($imageUrl);
         $filename = uniqid().'_'.basename($imageUrl);
 
         $filename = preg_replace("/[^a-zA-Z0-9\".\"]/", "_", $filename);
         //var_dump($filename);
-        if(wp_mkdir_p($upload_dir['path']))
-            $file = $upload_dir['path'] . '/' . $filename;
+        if(wp_mkdir_p($uploadDirectory['path']))
+            $file = $uploadDirectory['path'] . '/' . $filename;
         else
-            $file = $upload_dir['basedir'] . '/' . $filename;
-        file_put_contents($file, $image_data);
-        $wp_filetype = wp_check_filetype($filename, null );
+            $file = $uploadDirectory['basedir'] . '/' . $filename;
+        file_put_contents($file, $imageData);
+        $wpFileType = wp_check_filetype($filename, null );
         $attachment = array(
-            'post_mime_type' => $wp_filetype['type'],
+            'post_mime_type' => $wpFileType['type'],
             'post_title' => sanitize_file_name($filename),
             'post_content' => '',
             'post_status' => 'inherit'
         );
 
-        $attach_id = wp_insert_attachment($attachment, $file, $postId);
+        $attachId = wp_insert_attachment($attachment, $file, $postId);
         require_once($this->wpPath . 'wp-admin/includes/image.php');
-        $attach_data = wp_generate_attachment_metadata( $attach_id, $file );
-        wp_update_attachment_metadata($attach_id, $attach_data);
-        set_post_thumbnail($postId, $attach_id);
+        $attachData = wp_generate_attachment_metadata( $attachId, $file );
+        wp_update_attachment_metadata($attachId, $attachData);
+        set_post_thumbnail($postId, $attachId);
     }
 
     public function insertDraftPost(string $title, string $imageUrl, string $content, $categoryIds = WordpressDestinationSite::UNCATEGORIZED) {

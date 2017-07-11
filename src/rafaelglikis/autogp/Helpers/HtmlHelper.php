@@ -114,8 +114,9 @@ class HtmlHelper
      * @param $html
      * @return null|string
      */
-    private static function extractLink(string $html): string
+    public static function extractLink(string $html): string
     {
+        // TODO use dom
         $html = strip_tags($html, '<a>');
         $url = null;
 

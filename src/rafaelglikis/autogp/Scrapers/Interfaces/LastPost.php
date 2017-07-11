@@ -5,5 +5,5 @@ namespace rafaelglikis\autogp\Scrapers\Interfaces;
 
 interface LastPost
 {
-    public static function extractLastArticleFromCategory($categoryUrl): string;
+    public function extractLastArticleFromCategory($categoryUrl): string;
 }

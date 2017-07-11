@@ -2,28 +2,42 @@
 namespace rafaelglikis\autogp\Scrapers;
 
 use rafaelglikis\autogp\Datatypes\Article;
+use rafaelglikis\autogp\Datatypes\Category;
+use rafaelglikis\autogp\Datatypes\CopierCategory;
 use rafaelglikis\autogp\Helpers\HtmlHelper;
 use rafaelglikis\autogp\Scrapers\Interfaces\LastPost;
 use rafaelglikis\autogp\Scrapers\Interfaces\SingleArticleScraper;
 
-abstract class ArticleScraper implements SingleArticleScraper, LastPost//, LastArticleScraper
+abstract class ArticleScraper implements SingleArticleScraper, LastPost
 {
     private $articleUrls = array();
     private $articles = array();
-    private $categoryUrls = array();
+    private $categories = array();
 
-    public function extractArticles()
+    public function extractArticles(): array
     {
-        foreach ($this->getCategoryUrls() as $categoryUrl) {
-            $this->addArticleUrl($this->extractLastArticleFromCategory($categoryUrl));
+        foreach ($this->getCategories() as $category)
+        {
+            $articleUrl = $this->extractLastArticleFromCategory($category->getSourceUrl());
+            $article = $this->extractArticle($articleUrl);
+            if ($category instanceof CopierCategory)
+            {
+                $categories = $category->getDestinationCategories();
+                $article->setDestinationCategories($categories);
+            }
+            $this->addArticle($article);
         }
 
-        foreach ($this->getArticleUrls() as $articleUrl) {
-            $this->addArticle($this->extractArticle($articleUrl));
+        foreach ($this->getArticleUrls() as $articleUrl)
+        {
+            $article = $this->extractArticle($articleUrl);
+            $this->addArticle($article);
         }
+
+        return $this->articles;
     }
 
-    abstract public static function extractLastArticleFromCategory($categoryUrl): string;
+    abstract public function extractLastArticleFromCategory($categoryUrl): string;
 
     public function extractArticle(string $url): Article
     {
@@ -80,13 +94,18 @@ abstract class ArticleScraper implements SingleArticleScraper, LastPost//, LastA
         return $this->articles;
     }
 
-    public function addCategory(string $category)
+    public function addCategory(Category $category)
     {
-        $this->categoryUrls[] = $category;
+        $this->categories[] = $category;
     }
 
-    public function getCategoryUrls(): array
+    public function getCategories(): array
     {
-        return $this->categoryUrls;
+        return $this->categories;
+    }
+
+    public function setCategories(array $categories)
+    {
+        $this->categories = $categories;
     }
 }

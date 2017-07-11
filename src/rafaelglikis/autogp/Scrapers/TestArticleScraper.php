@@ -7,13 +7,18 @@
  */
 
 namespace rafaelglikis\autogp\Scrapers;
-
+use rafaelglikis\autogp\Helpers\HtmlHelper;
+use rafaelglikis\autogp\Helpers\TextHelper;
 
 class TestArticleScraper extends ArticleScraper
 {
-
-    public static function extractLastArticleFromCategory($categoryUrl): string
+    public function extractLastArticleFromCategory($categoryUrl): string
     {
-        // TODO: Implement extractLastArticleFromCategory() method.
+        $html = HtmlHelper::getHtmlFrom("$categoryUrl");
+        $aTag = TextHelper::strCut($html, "<p class=\"story-body__read-full-article\">", "</p>");
+
+        $articleUrl = HtmlHelper::extractLink($aTag);
+
+        return $articleUrl;
     }
 }

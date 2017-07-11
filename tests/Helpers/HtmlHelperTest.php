@@ -22,7 +22,7 @@ class HtmlHelperTest extends TestCase
     public function testFindMainImage()
     {
         $result = HtmlHelper::findMainImage(HtmlHelperTest::$html);
-        $expected_result = "https://ichef.bbci.co.uk/news/1024/cpsprodpb/8688/production/_96804443_riceball3.jpg";
+        $expected_result = "../tests/fixtures/images/potato.jpg";
 
         $this->assertEquals($result, $expected_result);
     }

@@ -11,6 +11,18 @@ class Article
     private $content;
     private $imgUrl;
 
+    private $destinationCategories = array();
+
+    public function getDestinationCategories(): array
+    {
+        return $this->destinationCategories;
+    }
+
+    public function setDestinationCategories(array $destinationCategories)
+    {
+        $this->destinationCategories = $destinationCategories;
+    }
+
     public function getSourceUrl(): string
     {
         return $this->sourceUrl;

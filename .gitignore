@@ -1,2 +1,5 @@
 .idea/
 vendor/
+sessions/
+examples/sessions/
+tests/sessions/
