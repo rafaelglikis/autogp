@@ -13,14 +13,11 @@ $scraper = new TestArticleScraper();
 // Adding article url
 $scraper->addArticleUrl("../tests/fixtures/test.html");
 
-// Adding Article
-$article = new Article();
-$article->setTitle("Test");
-$article->setImgUrl("../tests/fixtures/images/potato.jpg");
-$article->setContent("Lorem Ipsum testus salatius");
-$article->setDestinationCategories([4]);
-$scraper->addArticle($article);
+// Creating DestinationSite Object
+$destinationSite = new WordpressDestinationSite("/var/www/html/");
 
+// Creating Copier
+$copier = new Copier("test_to_test", $scraper, $destinationSite);
 
 // Adding Categories
 $categories= [
@@ -29,15 +26,11 @@ $categories= [
     new CopierCategory("../tests/fixtures/category.html", [8,9]),
     new CopierCategory("../tests/fixtures/category.html", [10,11]),
 ];
-/* @var $categories CopierCategory */
-foreach ($categories as $category) $scraper->addCategory($category);
 
-
-// Creating DestinationSite Object
-$destinationSite = new WordpressDestinationSite("/var/www/html/");
-
-// Creating Copier
-$copier = new Copier("test_to_test", $scraper, $destinationSite);
+$copier->setCategories($categories);
 
 // Copy
 $copier->update();
+
+// Copy Draft
+//$copier->update(false);

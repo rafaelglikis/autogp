@@ -1,6 +1,7 @@
 <?php
 namespace rafaelglikis\autogp\DestinationSites;
 use PHPUnit\Framework\Exception;
+use rafaelglikis\autogp\Datatypes\Article;
 
 /** @noinspection PhpUndefinedFunctionInspection */
 class WordpressDestinationSite extends DestinationSite
@@ -14,6 +15,32 @@ class WordpressDestinationSite extends DestinationSite
 
         remove_filter('content_save_pre', 'wp_filter_post_kses');
         remove_filter('content_filtered_save_pre', 'wp_filter_post_kses');
+    }
+
+    public function insertPublishedArticle(Article $article, $categories = null)
+    {
+        $title = $article->getTitle();
+        $image = $article->getImgUrl();
+        $content = $article->getContent();
+        if ($categories===null) $categories = $article->getDestinationCategories();
+        WordpressDestinationSite::insertPublishedPost($title, $image, $content, $categories);
+    }
+
+    public function insertDraftArticle(Article $article, $categories = null)
+    {
+        $title = $article->getTitle();
+        $image = $article->getImgUrl();
+        $content = $article->getContent();
+        if ($categories===null) $categories = $article->getDestinationCategories();
+        WordpressDestinationSite::insertDraftPost($title, $image, $content, $categories);
+    }
+
+    public function insertDraftPost(string $title, string $imageUrl, string $content, $categoryIds = WordpressDestinationSite::UNCATEGORIZED) {
+        WordpressDestinationSite::insertPost($title, $imageUrl, $content,  'draft', $categoryIds);
+    }
+
+    public function insertPublishedPost(string $title, string $imageUrl, string $content, $categoryIds = WordpressDestinationSite::UNCATEGORIZED) {
+        WordpressDestinationSite::insertPost($title, $imageUrl, $content, 'publish', $categoryIds);
     }
 
     protected function insertPost(string $title, string $imageUrl, string $content, string $status, $categoryIds = WordpressDestinationSite::UNCATEGORIZED)
@@ -32,7 +59,8 @@ class WordpressDestinationSite extends DestinationSite
         try {
             $postId = wp_insert_post($myPost); // Insert post (wordpress way)
             $this->setPostImage($postId, $imageUrl); // Set Image (wordpress way)
-            print "[+] Article: " . $title . " added as " . $status . " [ categories: ". implode(",", $categoryIds) . " ]\n";
+            print "[+] Post: " . $title . " added as " . $status .
+                " [ categories: ". implode(",", $categoryIds) . " ]\n";
         }
         catch (Exception $exception) {
             print "[-] Problem adding article: " . $title . " - skipped\n";
@@ -69,14 +97,6 @@ class WordpressDestinationSite extends DestinationSite
         $attachData = wp_generate_attachment_metadata( $attachId, $file );
         wp_update_attachment_metadata($attachId, $attachData);
         set_post_thumbnail($postId, $attachId);
-    }
-
-    public function insertDraftPost(string $title, string $imageUrl, string $content, $categoryIds = WordpressDestinationSite::UNCATEGORIZED) {
-        WordpressDestinationSite::insertPost($title, $imageUrl, $content,  'draft', $categoryIds);
-    }
-
-    public function insertPublishedPost(string $title, string $imageUrl, string $content, $categoryIds = WordpressDestinationSite::UNCATEGORIZED) {
-        WordpressDestinationSite::insertPost($title, $imageUrl, $content, 'publish', $categoryIds);
     }
 
     public function getWpPath(): string {

@@ -20,11 +20,6 @@ abstract class ArticleScraper implements SingleArticleScraper, LastPost
         {
             $articleUrl = $this->extractLastArticleFromCategory($category->getSourceUrl());
             $article = $this->extractArticle($articleUrl);
-            if ($category instanceof CopierCategory)
-            {
-                $categories = $category->getDestinationCategories();
-                $article->setDestinationCategories($categories);
-            }
             $this->addArticle($article);
         }
 
@@ -35,6 +30,17 @@ abstract class ArticleScraper implements SingleArticleScraper, LastPost
         }
 
         return $this->articles;
+    }
+
+    public function extractArticleUrls(): array
+    {
+        foreach ($this->getCategories() as $category)
+        {
+            $articleUrl = $this->extractLastArticleFromCategory($category->getSourceUrl());
+            $this->articleUrls[] =  $articleUrl;
+
+        }
+        return $this->articleUrls;
     }
 
     abstract public function extractLastArticleFromCategory($categoryUrl): string;

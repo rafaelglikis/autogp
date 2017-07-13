@@ -3,7 +3,7 @@
 Scraping micro-framework (php)
 
 ## Instalation
-    apt-get install php-curl php7.0-mbstring
+    apt install php-curl php7.0-mbstring php7.0-sqlite3
     composer update
     
 ## TODO
