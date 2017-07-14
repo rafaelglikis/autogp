@@ -1,7 +1,6 @@
 <?php
 
 namespace rafaelglikis\autogp\Copiers;
-use rafaelglikis\autogp\Datatypes\Article;
 use rafaelglikis\autogp\Datatypes\CopierCategory;
 use rafaelglikis\autogp\DestinationSites\DestinationSite;
 use rafaelglikis\autogp\Scrapers\ArticleScraper;
@@ -39,7 +38,7 @@ class Copier
             }
             else
             {
-                $this->database->insertRecord($articleUrl);
+                $this->database->insertRecordValue($articleUrl);
 
                 $article = $this->sourceSiteScraper->extractArticle($articleUrl);
                 $categories = $category->getDestinationCategories();

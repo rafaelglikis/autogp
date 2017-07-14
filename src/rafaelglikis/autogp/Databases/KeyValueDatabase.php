@@ -7,7 +7,7 @@ class KeyValueDatabase extends Database
     private $key;
     private $value;
 
-    function __construct($dbName, $tableName = "KEY_VALUE", $key="KEY" , $value="VALUE")
+    public function __construct($dbName, $tableName = "KEY_VALUE", $key="KEY" , $value="VALUE")
     {
         $this->tableName = $tableName;
         $this->key = $key;
@@ -15,13 +15,13 @@ class KeyValueDatabase extends Database
         parent::__construct($dbName);
     }
 
-    function createTableIfNotExist()
+    public function createTableIfNotExist()
     {
         $sql ="CREATE TABLE IF NOT EXISTS $this->tableName ($this->key INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, $this->value TEXT NOT NULL)";
         $this->executeSQL($sql);
     }
 
-    function insertRecordIfNotExist($value)
+    public function insertRecordValueIfNotExist($value)
     {
         if(!$this->recordExist($value))
         {
@@ -30,7 +30,7 @@ class KeyValueDatabase extends Database
         }
     }
 
-    function recordExist($value)
+    public function recordExist($value)
     {
         $this->createTableIfNotExist();
         $this->open($this->getDbName());
@@ -43,9 +43,63 @@ class KeyValueDatabase extends Database
         return $exist>0;
     }
 
-    function insertRecord($value)
+    public function insertRecordValue($value)
     {
         $sql ="INSERT INTO $this->tableName ($this->value) VALUES ('$value')";
+        $this->executeSQL($sql);
+    }
+
+    public function insertRecord($key, $value)
+    {
+        $key=self::escapeString($key);
+        $value=self::escapeString($value);
+        $sql ="INSERT INTO $this->tableName ($this->key, $this->value) VALUES ('$key', '$value')";
+        $this->executeSQL($sql);
+    }
+
+    public function checkValue($key, $value)
+    {
+        $key = self::escapeString($key);
+        $this->createTableIfNotExist();
+        $this->open($this->getDbName());
+        $sql ="SELECT $this->value FROM $this->tableName WHERE $this->key='$key'";
+        $ret = $this->query($sql);
+        $result = $ret->fetchArray();
+        $result = $result[0];
+        $this->close();
+
+        return ($result === $value);
+    }
+
+    public function getValueOf($key)
+    {
+        $tester=self::escapeString($key);
+        $this->createTableIfNotExist();
+        $this->open($this->getDbName());
+        $sql ="SELECT $this->value FROM $this->tableName WHERE $this->key='" . "$tester'";
+        $ret = $this->query($sql);
+        $result = $ret->fetchArray();
+        $result = $result[0];
+        $this->close();
+
+        return $result;
+    }
+
+    public function updateValue($key, $value)
+    {
+        $key=self::escapeString($key);
+        $value=self::escapeString($value);
+
+        $this->createTableIfNotExist();
+
+        $sql ="INSERT OR IGNORE INTO $this->tableName "
+            . "($this->key, $this->value) "
+            . "VALUES ('$key', '$value')";
+        $this->executeSQL($sql);
+
+        $sql ="UPDATE $this->tableName "
+            . "SET $this->value ='$value' "
+            ."WHERE $this->key='$key'";
         $this->executeSQL($sql);
     }
 

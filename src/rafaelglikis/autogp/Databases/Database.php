@@ -6,16 +6,18 @@ class Database extends SQLite3
 {
     private $dbName;
 
-    function __construct($dbName)
+    public function __construct($dbName)
     {
         $this->dbName = $dbName;
     }
 
-    function executeSQL(string $sql)
+    public function executeSQL(string $sql)
     {
         $this->open($this->dbName);
-        $this->query($sql);
+        $result = $this->query($sql);
         $this->close();
+
+        return $result;
     }
 
     /***************************************************************

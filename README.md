@@ -3,7 +3,7 @@
 Scraping micro-framework (php)
 
 ## Instalation
-    apt install php-curl php7.0-mbstring php7.0-sqlite3
+    apt install php-curl php7.0-mbstring php7.0-sqlite3 sendmail
     composer update
     
 ## TODO

@@ -5,7 +5,7 @@ use rafaelglikis\autogp\Helpers\HtmlHelper;
 
 class CopierDatabase extends KeyValueDatabase
 {
-    function __construct($dbName)
+    public function __construct($dbName)
     {
         $dbFilename = "sessions/copier/$dbName/databases/posts.db";
         if (!is_dir(dirname($dbFilename)))
@@ -15,21 +15,21 @@ class CopierDatabase extends KeyValueDatabase
         parent::__construct($dbFilename, "POSTS", "ID", "URL");
     }
 
-    function insertRecordIfNotExist($url)
+    public function insertRecordValueIfNotExist($url)
     {
         $url = HtmlHelper::clearLink($url);
-        parent::insertRecord($url);
+        parent::insertRecordValue($url);
     }
 
-    function recordExist($url)
+    public function recordExist($url)
     {
         $url = HtmlHelper::clearLink($url);
         return parent::recordExist($url);
     }
 
-    function insertRecord($url)
+    public function insertRecordValue($url)
     {
         $url = HtmlHelper::clearLink($url);
-        parent::insertRecord($url);
+        parent::insertRecordValue($url);
     }
 }

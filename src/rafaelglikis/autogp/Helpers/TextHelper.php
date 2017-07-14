@@ -26,4 +26,14 @@ class TextHelper
         return $cut;
     }
 
+    public static function simpleDiff(string $oldData, string $newData)
+    {
+
+        // Converting strings to arrays
+        $oldDataArray = explode(" ", $oldData);
+        $newDataArray = explode(" ", $newData);
+
+        return join(" \n", array_diff($newDataArray, $oldDataArray));
+    }
+
 }
