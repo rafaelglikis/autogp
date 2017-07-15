@@ -2,6 +2,6 @@
 
 // Fill in yours
 return [
-    'sender_email' => 'mail@mail.com',
-    'receiver_email' => 'mail@mail.com',
+    'sender_email' => 'tester@rtech.gr',
+    'receiver_email' => 'rafaelglikis@gamil.com',
 ];

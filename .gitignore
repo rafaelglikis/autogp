@@ -1,5 +1,7 @@
 .idea/
 vendor/
 sessions/
-examples/sessions/
 tests/sessions/
+/src/rafaelglikis/autogp/Testers/mail_conf.php
+copiers/
+docs/

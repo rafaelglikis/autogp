@@ -100,10 +100,17 @@ class HtmlHelper
      * @param $html
      * @return null|string
      */
-    private static function extractImage(string $html):string
+    public static function extractImage(string $html):string
     {
         $html = strip_tags($html, '<a><img>');
-        $url = TextHelper::strCut($html, 'href="', '"');
+        $url = null;
+        if (strpos($html, "src='") !== false) {
+            $url = TextHelper::strCut($html, "src='", "'");
+        }
+
+        if (strpos($html, 'src="') !== false) {
+            $url = TextHelper::strCut($html, 'src="', '"');
+        }
 
         return $url;
     }

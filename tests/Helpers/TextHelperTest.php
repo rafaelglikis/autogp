@@ -18,4 +18,9 @@ class TextHelperTest extends TestCase
         $this->assertEquals(TextHelper::strCut(TextHelperTest::$str, "<p>", "</p>"), "Paragraph");
         $this->assertEquals(TextHelper::strCut(TextHelperTest::$str, null, "<head>"), "<html>");
     }
+
+    public function testSimpleDiff()
+    {
+        $this->assertEquals(TextHelper::simpleDiff("This is a test", "This is a testa"), "testa");
+    }
 }

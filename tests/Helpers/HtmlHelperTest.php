@@ -58,4 +58,16 @@ class HtmlHelperTest extends TestCase
             $this->assertEquals("google.com", HtmlHelper::clearLink($link));
         }
     }
+
+    public function testExtractImage()
+    {
+        $html = "<img class=\"js-image-replace\" src=\"https://ichef.bbci.co.uk/news/320/cpsprodpb/8688/production/_96804443_riceball3.jpg\" width=\"976\" height=\"549\">Image copyright";
+        $this->assertEquals("https://ichef.bbci.co.uk/news/320/cpsprodpb/8688/production/_96804443_riceball3.jpg", HtmlHelper::extractImage($html));
+    }
+
+    public function testExtractLink()
+    {
+        $html = "<a href=\"http://www.bbc.co.uk/news/world-africa-38467242\" class=\"story-body__link\">said there was no evidence for the claims</a>.";
+        $this->assertEquals("http://www.bbc.co.uk/news/world-africa-38467242", HtmlHelper::extractLink($html));
+    }
 }
