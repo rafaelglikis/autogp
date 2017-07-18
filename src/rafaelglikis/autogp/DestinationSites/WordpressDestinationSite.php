@@ -75,7 +75,7 @@ class WordpressDestinationSite extends DestinationSite
     {
         $uploadDirectory = wp_upload_dir();
         $imageData = file_get_contents($imageUrl);
-        $filename = uniqid().'_'.basename($imageUrl);
+        $filename = uniqid() . '_' . basename($imageUrl);
 
         $filename = preg_replace("/[^a-zA-Z0-9\".\"]/", "_", $filename);
         //var_dump($filename);
@@ -94,7 +94,7 @@ class WordpressDestinationSite extends DestinationSite
 
         $attachId = wp_insert_attachment($attachment, $file, $postId);
         require_once($this->wpPath . 'wp-admin/includes/image.php');
-        $attachData = wp_generate_attachment_metadata( $attachId, $file );
+        $attachData = wp_generate_attachment_metadata($attachId, $file);
         wp_update_attachment_metadata($attachId, $attachData);
         set_post_thumbnail($postId, $attachId);
     }

@@ -1,5 +1,6 @@
 #!/bin/bash
 cd tests
-../vendor/phpunit/phpunit/phpunit .
-#../vendor/phpunit/phpunit/phpunit . --coverage-text
+../vendor/phpunit/phpunit/phpunit . --coverage-text --color
+echo cleanning the mess . . .
+rm fixtures/wordpress/test/*
 cd ..
