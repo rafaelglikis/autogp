@@ -38,7 +38,8 @@ class Copier
             }
             else
             {
-                $this->database->insertRecordValue($articleUrl);
+                $this->database->
+                insertRecordValue($articleUrl);
 
                 $article = $this->sourceSiteScraper->extractArticle($articleUrl);
                 $categories = $category->getDestinationCategories();
