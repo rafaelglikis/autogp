@@ -18,13 +18,14 @@ class Tester
         $this->testerName = $testerName;
     }
 
-    public function test(string $result, $notifications = true)
+    public function test(string $result, $notifications = true): bool
     {
         $database = new TesterDatabase($this->dbFilename);
         $test = $database->checkResults($this->getTesterName(), $result);
         if ($test)
         {
             print "[+] Test " . $this->getTesterName() . " OK \n";
+            return true;
         }
         else
         {
@@ -56,7 +57,7 @@ class Tester
 
                 Mailer::sendHtmlMail($mail);
             }
-
+            return false;
         }
     }
 
