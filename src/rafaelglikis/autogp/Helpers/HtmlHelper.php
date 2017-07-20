@@ -143,14 +143,14 @@ class HtmlHelper
      * @param $url
      * @return mixed
      */
-    public static function clearLink(string $url): string
+    public static function clearLink(string $url, bool $all = false): string
     {
         $url = str_replace('https://www.', '', $url);
         $url = str_replace('http://www.', '', $url);
         $url = str_replace('https://', '', $url);
         $url = str_replace('http://', '', $url);
 
-        if (strpos($url, '/') !== false) return TextHelper::strCut($url, null, "/");
+        if ($all && strpos($url, '/') !== false) return TextHelper::strCut($url, null, "/");
 
         return $url;
     }
