@@ -8,6 +8,8 @@ class TesterTest extends TestCase
 {
     public function testTester()
     {
+        $this->setOutputCallback(function() {});
+
         // Testing Articles that not exists
         /** @var  $testers TestArticleScraper*/
         $testers = array();

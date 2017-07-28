@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: rafaelglikis
- * Date: 06/07/2017
- * Time: 5:02 ΜΜ
- */
 
 namespace rafaelglikis\autogp\Scrapers;
 use rafaelglikis\autogp\Helpers\HtmlHelper;

@@ -13,6 +13,19 @@ class Article
 
     private $destinationCategories = array();
 
+    public function dumpArticleHtml()
+    {
+        $html = '<html>'
+            . '<head>' . '<title>' . $this->getTitle() . '</title>' . '</head>'
+            . '<body>'
+            . '<img src="' . $this->getImgUrl() . '">'
+            . $this->getContent() . "\n"
+            . '</body>'
+            . '</html>';
+
+        print $html;
+    }
+
     public function getDestinationCategories(): array
     {
         return $this->destinationCategories;
