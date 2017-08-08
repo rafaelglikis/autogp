@@ -169,7 +169,8 @@ class HtmlHelper
         $Target = new DOMDocument;
         $Target->appendChild($Target->importNode($mainContentNode, true));
 
-        $mainContent = $Target->saveHTML();
+        // $mainContent = $Target->saveHTML();
+        $mainContent = mb_convert_encoding($Target->saveHTML(),  "utf-8", "HTML-ENTITIES");
         $mainContent = HtmlHelper::fixHtml($mainContent);
 
         return $mainContent;

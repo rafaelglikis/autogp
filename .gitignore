@@ -3,5 +3,5 @@ vendor/
 sessions/
 tests/sessions/
 /src/rafaelglikis/autogp/Testers/mail_conf.php
-#copiers/
+copiers/
 docs/
