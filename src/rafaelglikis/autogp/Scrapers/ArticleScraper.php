@@ -3,7 +3,6 @@ namespace rafaelglikis\autogp\Scrapers;
 
 use rafaelglikis\autogp\Datatypes\Article;
 use rafaelglikis\autogp\Datatypes\Category;
-use rafaelglikis\autogp\Datatypes\CopierCategory;
 use rafaelglikis\autogp\Helpers\HtmlHelper;
 use rafaelglikis\autogp\Scrapers\Interfaces\LastPost;
 use rafaelglikis\autogp\Scrapers\Interfaces\SingleArticleScraper;

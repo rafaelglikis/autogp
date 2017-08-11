@@ -4,4 +4,5 @@ sessions/
 tests/sessions/
 /src/rafaelglikis/autogp/Testers/mail_conf.php
 copiers/
+crawlers/
 docs/
